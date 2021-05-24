@@ -1,0 +1,42 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+{% block headblock %}
+    <title>Contact Us | iNote</title>
+    <link rel="stylesheet" href="{% static 'assets/css/thankyou-for-contact.css' %}">
+
+{% endblock headblock %}
+
+{% block navbar-right %}
+    <li class="nav-item">
+    {%if name != None %}
+    <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" style="color: #ffc107;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{name|title}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    {% else %}
+        <a class=" btn  btn-outline-warning navbar-custom-button" href="/login">Login</a>
+    {% endif %}
+    </li>
+{% endblock navbar-right %}
+
+
+{% block bodyblock %}
+
+    <div class="container-fluid content-section-a">
+           
+    </div>
+    <div class="container-fluid custom-container">
+           <div class="container">
+               <h3>for contacting us. You will recieve mail within 24 Hour....</h3>
+           </div>
+    </div>
+    
+
+    
+{% endblock bodyblock %}

@@ -1,0 +1,171 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+{% block headblock %}
+    <title>iNote - Register</title>
+    <link rel="stylesheet" href="{% static 'assets/css/signup.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+
+{% endblock headblock %}
+
+
+{% block bodyblock %}
+
+<div class="container-fluid content-section-a">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="container container-header">
+                        <h1>iNote</h1>
+                        Notedown Your Memory
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div class="container custom-form">
+                            <form method="POST" enctype="multipart/form-data">
+                                <!-- Security token -->
+                                    {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="firstname" class="form-label">First Name</label>
+                                    {{ form.firstname }}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastname" class="form-label">Last Name</label>
+                                    {{ form.lastname }}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                    {{ form.email }}
+                                </div>
+                                
+
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <div class="input-group mb-3">
+                                        {{ form.password }}
+                                        <button class="btn btn-outline-dark" onclick="showPassword()"  type="button" id="button-addon2"><i class="fa fa-eye fa-copy-custom"></i></button>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+                                    <div class="input-group mb-3">
+                                        <input type="password" onblur="validatePassword()"  class="form-control" id="exampleInputPassword2">
+                                    </div>                                   
+                                </div>
+                                <div class="g-recaptcha" data-sitekey="your-site-key"></div>
+
+                                
+                                <button type="submit" disabled id="submitBtn" class="btn btn-primary custom-btn">Signup</button>
+                            </form>
+
+                            <div>
+                                <table style="width:100%;">
+							        <tbody>
+                                        <tr>
+                                            <td style="width:50%; vertical-align:middle;"><hr></td>
+                                            <td style="vertical-align:middle;  "> &nbsp; &nbsp; OR &nbsp; &nbsp; </td>
+                                            <td style="width:50%; vertical-align:middle;"><hr></td>
+                                        </tr>
+						            </tbody>
+                                </table>
+
+                                <meta name="google-signin-client_id" content="your-id.apps.googleusercontent.com">
+                                
+                                <div id="my-signin2"  class="custom-google" ></div>
+                                <script>
+                                    function onSuccess(googleUser) {
+                                    document.querySelector("#exampleInputEmail1").value = googleUser.getBasicProfile().getEmail();
+                                    document.querySelector("#firstname").value = googleUser.getBasicProfile().getGivenName();
+                                    document.querySelector("#lastname").value = googleUser.getBasicProfile().getFamilyName();
+                                    
+                                    data = googleUser.getBasicProfile()
+                                    console.log(googleUser.getBasicProfile().getId())
+
+
+                                    }
+                                    function onFailure(error) {
+                                    console.log(error);
+                                    }
+                                    function renderButton() {
+                                    gapi.signin2.render('my-signin2', {
+                                        'scope': 'profile email',
+                                        'width': 240,
+                                        'height': 50,
+                                        'longtitle': true,
+                                        'theme': 'dark',
+                                        'onsuccess': onSuccess,
+                                        'onfailure': onFailure
+                                    });
+                                    }
+                                </script>
+
+                                <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+
+                                <div style="text-align: center; margin-top:30px;">
+                                    Already have an account? <a style="text-decoration: none;" href="/login">Log In</a>
+                                </div>
+                            </div>
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showPassword() {
+                var x = document.getElementById("exampleInputPassword1");
+                if (x.type === "password") {
+                    x.type = "text";
+                    element = document.body.querySelector('i')
+                    element.classList.remove('fa-eye')
+                    element.classList.add('fa-eye-slash')
+                } else {
+                    x.type = "password";
+                    element = document.body.querySelector('i')
+                    element.classList.remove('fa-eye-slash')
+                    element.classList.add('fa-eye')
+                }
+
+
+            }
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>    
+    <script>
+    window.onload = function() {
+        var $recaptcha = document.querySelector('#g-recaptcha-response');
+
+        if($recaptcha) {
+            $recaptcha.setAttribute("required", "required");
+        }
+    };
+
+    function validatePassword(){ if (document.querySelector('#exampleInputPassword2').value ==  document.querySelector('#exampleInputPassword1').value){
+    document.querySelector('#submitBtn').disabled = false;} else { document.querySelector('#submitBtn').disabled = true;} }
+    </script> 
+
+                                {% comment %} <script>
+                                var element = document.body.querySelector(".abcRioButtonContents");
+                                element.innerText="Signup With Google"
+                                console.log(element)
+                                </script> {% endcomment %}
+{% endblock bodyblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

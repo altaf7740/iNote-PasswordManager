@@ -1,0 +1,51 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+{% block headblock %}
+    <title>iNote - Login</title>
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <style>
+        .custom-card{
+            margin:auto;
+            margin-top:10%;
+            margin-bottom:10%;
+        }
+        .custom-btn{
+            width:100%;
+        }
+    </style>    
+
+{% endblock headblock %}
+
+
+
+{% block bodyblock %}
+
+<div class="card custom-card" style="width: 22rem;">
+    <img src="{% static 'assets/img/otp.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Enter OTP : </h5>
+      <form action="../verifyotp/" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+        <input type="password" name="otp" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="g-recaptcha" data-sitekey="site key"></div>
+
+        <input type="submit" class="btn btn-primary custom-btn" value="Submit">
+      </form>
+    </div>
+  </div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>    
+<script>
+        window.onload = function() {
+            var $recaptcha = document.querySelector('#g-recaptcha-response');
+
+            if($recaptcha) {
+                $recaptcha.setAttribute("required", "required");
+            }
+        };
+</script> 
+{% endblock bodyblock %}

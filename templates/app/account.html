@@ -1,0 +1,143 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+{% block headblock %}
+    <title>iNote - Account</title>
+    <link rel="stylesheet" href="{% static 'assets/css/signup.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+
+{% endblock headblock %}
+
+
+{% block bodyblock %}
+
+<div class="container-fluid content-section-a">
+        <div class="container custom-container">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="container container-header">
+                        <h1>iNote</h1>
+                        Notedown Your Memory
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div class="container custom-form">
+                            <form method="POST" enctype="multipart/form-data">
+                                <!-- Security token -->
+                                    {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="firstname" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" Name="firstname" value="{{ firstname }}"  id="exampleInputPassword1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lastname" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" Name="lastname" value="{{ lastname }}"  id="exampleInputPassword1">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" Name="email" value="{{ email }}" id="exampleInputPassword1">
+                                </div>
+                                
+
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control" Name="password" placeholder="fill only if you want to change password" id="exampleInputPassword1">
+                                        <button class="btn btn-outline-dark" onclick="showPassword()"  type="button" id="button-addon2"><i class="fa fa-eye fa-copy-custom"></i></button>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                
+                                
+                                <button type="submit" class="btn btn-primary custom-btn">Update</button>
+                            </form>
+
+                            <div>
+                                <table style="width:100%;">
+							        <tbody>
+                                        <tr>
+                                            <td style="width:50%; vertical-align:middle;"><hr></td>
+                                            <td style="vertical-align:middle;  "> &nbsp; &nbsp; OR &nbsp; &nbsp; </td>
+                                            <td style="width:50%; vertical-align:middle;"><hr></td>
+                                        </tr>
+						            </tbody>
+                                </table>
+
+                            </div>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-danger custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                <i class="fa fa-trash"></i> Delete My Account
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="staticBackdropLabel">Are You Sure ?</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                      <a href="../deletemyaccount" class="btn btn-danger">Yes</a>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                            
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showPassword() {
+                var x = document.getElementById("exampleInputPassword1");
+                if (x.type === "password") {
+                    x.type = "text";
+                    element = document.body.querySelector('i')
+                    element.classList.remove('fa-eye')
+                    element.classList.add('fa-eye-slash')
+                } else {
+                    x.type = "password";
+                    element = document.body.querySelector('i')
+                    element.classList.remove('fa-eye-slash')
+                    element.classList.add('fa-eye')
+                }
+
+
+            }
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>    
+    <script>
+    window.onload = function() {
+        var $recaptcha = document.querySelector('#g-recaptcha-response');
+
+        if($recaptcha) {
+            $recaptcha.setAttribute("required", "required");
+        }
+    };
+    </script> 
+{% endblock bodyblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

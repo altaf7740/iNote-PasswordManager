@@ -1,0 +1,353 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+{% block headblock %}
+    <title>iNote - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'assets/css/dashboard.css' %}">
+
+{% endblock headblock %}
+
+{% block navbarDashboard %}active{% endblock navbarDashboard %}
+
+{% block navbar-right %}
+    <li class="nav-item">
+    {%if name != None %}
+    <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" style="color: #ffc107;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{name|title}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/account">Account</a></li>
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    {% else %}
+        <a class=" btn  btn-outline-warning navbar-custom-button" href="/login">Login</a>
+    {% endif %}
+    </li>
+{% endblock navbar-right %}
+
+{% block bodyblock %}
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left:20px; padding-right:20px; margin-bottom:50px;">
+        <div class="container-fluid">
+            <span class="navbar-brand" style="font-weight:800; font-size:28px; ">Manage Credentials</span>
+            <!-- <button class="btn btn-primary" type="submit"><i class="fa fa-plus "></i> &nbsp;Add New Credential</button> -->
+
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa fa-plus "></i> &nbsp;Add New Credential
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Enter Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                <!-- Security token -->
+                                    {% csrf_token %}
+                                
+                                <div class="mb-3">
+                                    <label for="websitefield" class="form-label">Website</label>
+                                    {{ form.website }}
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="usernamefield" class="form-label">Username</label>
+                                    {{ form.username }}
+                                </div>
+                                        
+                                <div class="mb-3">
+                                    <label for="passwordfield" class="form-label">Password</label>
+                                    {{ form.password }}
+                                </div>
+
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" onclick="showPassword2()" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Show Password
+                                    </label>
+                                </div>
+                                
+                                <div class="g-recaptcha" data-sitekey="your site key"></div>
+                            
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+        </div>
+    </nav>
+
+    <!---data to be shown -->
+    <div class="container desktop-view" style="margin-top:30px">
+        
+
+        
+        <table class="styled-table" style="margin:auto; margin-top:30px; margin-bottom:100px">
+            <thead>
+                <tr>
+                    <th>SNo</th>
+                    <th>Website</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cred in credential %}
+                    {% if forloop.counter|divisibleby:"2" %}
+                        <tr class="active-row">
+                            <td>{{ forloop.counter }}.</td>
+                            <td>{{ cred.website}} </td>
+                            <td>{{ cred.username }}</td>
+                            <td>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" id="mypass{{forloop.counter}}" disabled value="{{ cred.password }}">
+                                    <button class="btn btn-outline-dark" onclick="showPassword({{forloop.counter}})"  type="button" id="button-addon2"><i class="fa fa-eye fa-copy-custom" id="icon{{forloop.counter}}"></i></button>
+                                    <button class="btn btn-outline-dark" onclick="copyClipboard({{forloop.counter}})"  type="button" id="button-addon2"><i class="fa fa-copy "></i></button>
+                                </div>
+                            </td>
+                            <td>
+
+                                <button type="button" class="btn btn-outline-dark custom-btn-anchor" data-bs-toggle="modal" data-bs-target="#exampleModalUpdateIf">
+                                    <i class="fa fa-edit"></i> Edit
+                                </button>
+
+                            <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-outline-danger custom-btn-anchor" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel">Are You Sure ?</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                          <a href="delete/{{cred.id}}" class="btn btn-danger">Yes</a>
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="modal fade" id="exampleModalUpdateIf" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Enter Details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                                <form method="POST" action="../dashboard/{{cred.id}}" enctype="multipart/form-data">
+                                                    <!-- Security token -->
+                                                        {% csrf_token %}
+                                                    
+                                                    <div class="mb-3">
+                                                        <label for="websitefield" class="form-label">Website</label>
+                                                        <input type="text" value="{{ cred.website }}" name="website" class="form-control" id="exampleInputPassword1">
+                                                        
+                                                    </div>
+                    
+                                                    <div class="mb-3">
+                                                        <label for="usernamefield" class="form-label">Username</label>
+                                                        <input type="text" value="{{ cred.username }}" name="username" class="form-control" id="exampleInputPassword1">
+                                                    </div>
+                                                            
+                                                    <div class="mb-3">
+                                                        <label for="passwordfield" class="form-label">Password</label>
+                                                        <input type="password" value="{{ cred.password }}" name="password" class="form-control" id="exampleInputPassword1">
+                                                    </div>
+                    
+                    
+                                                    
+                                                    
+                                                
+                                                
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <input type="submit" class="btn btn-success" value="Update">
+                                        </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td>{{ forloop.counter }}.</td>
+                            <td>{{ cred.website}} </td>
+                            <td>{{ cred.username }}</td>
+                            <td>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" id="mypass{{forloop.counter}}" disabled value="{{ cred.password }}">
+                                    <button class="btn btn-outline-dark" onclick="showPassword({{forloop.counter}})"  type="button" id="button-addon2"><i class="fa fa-eye fa-copy-custom" id="icon{{forloop.counter}}"></i></button>
+                                    <button class="btn btn-outline-dark" onclick="copyClipboard({{forloop.counter}})"  type="button" id="button-addon2"><i class="fa fa-copy fa-copy-custom"></i></button>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-dark custom-btn-anchor" data-bs-toggle="modal" data-bs-target="#exampleModalUpdateElse">
+                                    <i class="fa fa-edit"></i> Edit
+                                </button>
+                                <button type="button" class="btn btn-outline-danger custom-btn-anchor" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                    <i class="fa fa-trash"></i> Delete
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel">Are You Sure ?</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                          <a href="delete/{{cred.id}}" class="btn btn-danger">Yes</a>
+                                          
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="exampleModalUpdateElse" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Enter Details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                                <form method="POST" action="../dashboard/{{cred.id}}" enctype="multipart/form-data">
+                                                    <!-- Security token -->
+                                                        {% csrf_token %}
+                                                    
+                                                        <div class="mb-3">
+                                                            <label for="websitefield" class="form-label">Website</label>
+                                                            <input type="text" value="{{ cred.website }}" name="website" class="form-control" id="exampleInputPassword1">
+                                                            
+                                                        </div>
+                        
+                                                        <div class="mb-3">
+                                                            <label for="usernamefield" class="form-label">Username</label>
+                                                            <input type="text" value="{{ cred.username }}" name="username" class="form-control" id="exampleInputPassword1">
+                                                        </div>
+                                                                
+                                                        <div class="mb-3">
+                                                            <label for="passwordfield" class="form-label">Password</label>
+                                                            <input type="password" value="{{ cred.password }}" name="password" class="form-control" id="exampleInputPassword1">
+                                                        </div>
+                        
+                    
+                                                    
+                                                    
+                                                
+                                                
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <input type="submit" class="btn btn-success" value="Update">
+                                        </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+                        
+
+    <script>
+        function showPassword2(){
+            var x = document.getElementById("passwordfield");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        function showPassword(pos) {
+
+            pos1 = "mypass"+pos.toString();
+            icon = "icon"+pos.toString();
+                /* Get the text field */
+            if (document.getElementById(pos1).type === "password"){
+                document.getElementById(pos1).type = "text";
+                document.getElementById(icon).classList.remove('fa-eye');
+                document.getElementById(icon).classList.add('fa-eye-slash');
+            }
+            else{
+                document.getElementById(pos1).type = "password";
+                document.getElementById(icon).classList.remove('fa-eye-slash');
+                document.getElementById(icon).classList.add('fa-eye');
+
+            }
+        }
+
+            function copyClipboard(pos) {
+                pos = "mypass"+pos.toString();
+                /* Get the text field */
+                document.getElementById(pos).type = "text";
+                document.getElementById(pos).disabled = false;
+    
+                var copyText = document.getElementById(pos);
+    
+                /* Select the text field */
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); /* For mobile devices */
+                
+    
+                /* Copy the text inside the text field */
+                document.execCommand("copy");
+                document.getElementById(pos).disabled = true;
+
+    
+                document.getElementById(pos).type = "password";
+    
+                /* Alert the copied text */
+                alert("Password copied to clipboard ! ");
+            }
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>    
+    <script>
+        window.onload = function() {
+            var $recaptcha = document.querySelector('#g-recaptcha-response');
+        
+            if($recaptcha) {
+                $recaptcha.setAttribute("required", "required");
+            }
+        };
+    </script> 
+{% endblock bodyblock %}
+

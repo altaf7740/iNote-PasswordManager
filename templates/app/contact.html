@@ -1,0 +1,109 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+
+{% block headblock %}
+    <title>Contact Us | iNote</title>
+    <link rel="stylesheet" href="{% static 'assets/css/contact.css' %}">
+{% endblock headblock %}
+
+{% block navbarContact %}active{% endblock navbarContact %}
+
+{% block navbar-right %}
+    <li class="nav-item">
+    {%if name != None %}
+    <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" style="color: #ffc107;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{name|title}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/account">Account</a></li>
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    {% else %}
+        <a class=" btn  btn-outline-warning navbar-custom-button" href="/login">Login</a>
+    {% endif %}
+    </li>
+{% endblock navbar-right %}
+
+
+{% block bodyblock %}
+
+    <div class="container-fluid content-section-a">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-sm-7">
+                        <h1>Get in touch</h1>
+                        <div class="passage1">
+                            Want to get in touch? We'd love to hear from you. Here's how you can reach us...
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-5 col-sm-5">
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="container-fluid content-section-b">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 custom-info">
+                        <h2>Mohammad Altaf Hussain</h2>
+                        <div class="passageb1">
+                            <p>Full Stack Developer <br>
+                            API Developer <br>
+                            Ethical Hacker </p>
+                        </div>
+
+                        <div class="passageb2">
+                            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm22 16l-6.526-6.618-3.445 3.483-3.418-3.525-6.611 6.66 5.051-8-5.051-6 10.029 7.446 9.971-7.446-4.998 6.01 4.998 7.99z"/></svg>iamaltaf@protonmail.com <br>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 2c0-1.104-.896-2-2-2h-10c-1.104 0-2 .896-2 2v20c0 1.104.896 2 2 2h10c1.104 0 2-.896 2-2v-20zm-8.5 0h3c.276 0 .5.224.5.5s-.224.5-.5.5h-3c-.276 0-.5-.224-.5-.5s.224-.5.5-.5zm1.5 20c-.553 0-1-.448-1-1s.447-1 1-1c.552 0 .999.448.999 1s-.447 1-.999 1zm5-3h-10v-14.024h10v14.024z"/></svg>(+91) 790-319-8369 <br>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-3.148 0-6 2.553-6 5.702 0 4.682 4.783 5.177 6 12.298 1.217-7.121 6-7.616 6-12.298 0-3.149-2.851-5.702-6-5.702zm0 8c-1.105 0-2-.895-2-2s.895-2 2-2 2 .895 2 2-.895 2-2 2zm12 16l-6.707-2.427-5.293 2.427-5.581-2.427-6.419 2.427 4-9 3.96-1.584c.38.516.741 1.08 1.061 1.729l-3.523 1.41-1.725 3.88 2.672-1.01 1.506-2.687-.635 3.044 4.189 1.789.495-2.021.465 2.024 4.15-1.89-.618-3.033 1.572 2.896 2.732.989-1.739-3.978-3.581-1.415c.319-.65.681-1.215 1.062-1.731l4.021 1.588 3.936 9z"/></svg>Jamshedpur, India </p>
+                        </div>
+                        
+                        <div class="imageb2">
+                            <img class="content-section-a-image" src="{% static 'assets/img/me.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-6 custom-form">
+                    <form method="post" action="/contact-us-functionality/">
+                    {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Name (Required)</label>
+                            <input type="text" name="username" class="form-control" Required id="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Email (Required)</label>
+                            <input type="email" name="email" class="form-control" Required id="Email" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="problem" class="form-label">How can i help you (Required)</label>
+                            <textarea class="form-control" name="problem" Required id="problem" rows="6"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="curious" class="form-label">If you found me through Google, do you recall what you searched for? Just curious.</label>
+                            <input type="text" name="curious" class="form-control" id="curious">
+                        </div>
+                        <div class="g-recaptcha" data-sitekey="site key" Required></div>
+                        <button type="submit" class="btn btn-primary custom-btn">Submit</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+    </div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>  
+<script>
+window.onload = function() {
+    var $recaptcha = document.querySelector('#g-recaptcha-response');
+
+    if($recaptcha) {
+        $recaptcha.setAttribute("required", "required");
+    }
+};
+</script>  
+
+{% endblock bodyblock %}

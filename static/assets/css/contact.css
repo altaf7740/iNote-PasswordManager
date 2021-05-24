@@ -1,0 +1,82 @@
+.content-section-a{
+    padding-top: 9%;
+    padding-bottom: 9%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    background-image: url(../img/contact.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content-section-b{
+    padding-top: 9%;
+    padding-bottom: 9%;
+}
+
+@media (max-width: 575.98px) { 
+    .custom-info{
+        text-align: center;
+    }
+}
+
+.custom-info{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+}
+
+h2{
+    font-family: 'Rubik', sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+.passageb2{
+    margin-top: 30px;
+}
+
+.passageb2 svg{
+    margin-right: 10px;
+}
+
+h1{
+    font-family: 'Fredoka One', cursive;
+    font-size: 50px;
+    color: rgb(80, 77, 77);
+    margin-bottom: 5%;
+}
+
+.custom-form{
+    background-color: #3F3F3F;
+    color: white;
+    padding: 30px;
+    border-radius: 2%;
+}
+
+.custom-form label{
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.custom-btn{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.imageb2 img{
+    width: 60%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border:  #3F3F3F 5px solid;
+    border-radius: 3%;
+    
+}
+
+#g-recaptcha-response {
+    display: block !important;
+    position: absolute;
+    margin: -78px 0 0 0 !important;
+    width: 302px !important;
+    height: 76px !important;
+    z-index: -999999;
+    opacity: 0;
+}

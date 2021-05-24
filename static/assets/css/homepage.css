@@ -1,0 +1,77 @@
+.cover{
+    background-image: url('../img/Cover.png') ;
+    background-size: cover;
+    color: white;
+    text-align: center;
+     
+}
+
+
+.container-header{
+    padding-top: 120px;
+    padding-bottom: 40px;
+    font-size: 40px;
+    font-family: 'Architects Daughter', cursive;
+    font-weight: bolder;
+    
+}
+.container-header h1{
+    font-size: 100px;
+    font-family: 'Goudy Bookletter 1911', serif;
+    
+}
+
+.button-outline-light{
+    font-weight: bolder;
+}
+
+.content-section-a{
+    background-color: #3F3F3F;
+    color:white;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    font-weight: 200;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.passage1{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    
+}
+
+.passage2{
+    margin-top: 20px;
+    margin-bottom: 60px;
+    font-size: 14px;
+    
+}
+
+.content-section-a-image{
+    max-height: 500px;
+    max-width: 250px;
+    margin-left: 15%;
+    margin-bottom: 80px;
+    margin-top: 5%;
+}
+
+.content-section-b{
+    background-color: white;
+    color:black;
+    padding-top: 80px;
+    padding-bottom: 10px;
+    font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+}
+h2{
+    font-weight: 600;
+}
+
+.content-section-c-image{
+    max-height: 500px;
+    max-width: 250px;
+    margin-left: 10%;
+    margin-bottom: 80px;
+}

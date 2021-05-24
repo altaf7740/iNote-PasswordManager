@@ -1,0 +1,119 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+
+{% block headblock %}
+    <title>About Us | iNote</title>
+    <link rel="stylesheet" href="{% static 'assets/css/about.css' %}">
+
+{% endblock headblock %}
+
+{% block navbarAbout %}active{% endblock navbarAbout %}
+
+{% block navbar-right %}
+    <li class="nav-item">
+    {%if name != None %}
+    <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" style="color: #ffc107;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{name|title}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/account">Account</a></li>
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    {% else %}
+        <a class=" btn  btn-outline-warning navbar-custom-button" href="/login">Login</a>
+    {% endif %}
+    </li>
+{% endblock navbar-right %}
+
+
+{% block bodyblock %}
+
+    <div class="container-fluid content-section-a">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-sm-7">
+                        <h1>Emphasizing millions <br> their passwords.</h1>
+                        
+                    </div>
+                    <div class="col-lg-5 col-sm-5">
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="container-fluid content-section-b">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-sm-6 custom-info">
+                        <h2>Our Mission</h2>
+                        <div class="passageb1">
+                            We want you to provide a platform where which follow the principle of Zero Trust Model. A platform where you have the full control of your data.  
+                        </div>
+
+                        <div class="passageb2">
+                            Security is our first priority. To achieve it we use 2 way authentication, dual encryption, and makes the project as open source. 
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-5 col-sm-6 custom-form">
+                        
+                        <div class="imageb2">
+                            <img class="content-section-a-image" src="{% static 'assets/img/vision-and-mission.jpg' %}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+
+                    <div class="col-lg-12 col-sm-12 custom-info2">
+                        <h2>Many years as Full Stack Engineer, API Developer & Ethical Hacker</h2>
+                        <h3>Our Developement is based on Zero Trust Model</h3>
+                        
+                    </div>
+                    <div class="col-lg-5 col-sm-6 custom-form">
+                        
+                        <div class="imageb3">
+                            <img class="content-section-a-image" src="{% static 'assets/img/me.jpg' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-sm-6 custom-info">
+                        
+                        <div class="passageb1">
+                            <p>
+                            Hello. I’m Mohammad Altaf Hussain. It’s a pleasure to meet you.
+                            </p><p>
+                            For the last few years, I’ve been developing apps, api and providing security solution, serving hundreds of clients in diverse industries.  I’ve helped numerous businesses boost their sales through the successful execution of their marketing plans.
+                            </p><p>
+                            Many of my clients have been with me for years, coming back over and over for assistance with their copywriting projects as their business grows. Among the projects I’ve done are websites, landing pages, brochures, sales letters, data sheets, ads, blogs and video scripts.
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <div class="col-lg-12 col-sm-12 custom-info">
+                        <p>
+                        For the past 20 years, I’ve especially focused on providing digital marketing services as a website copywriter and search engine optimization (SEO) expert. If you found me via a Google search, then you know I must be doing something right. I rank at the top for my main keywords and don’t spend a cent on Google ads. What I’ve done for myself, I can do for you — help your website rise on the search engines and, most importantly, convert visitors into customers.
+                        </p><p>
+                        Working on your behalf, I’ll learn about your business, your markets, your customers, your prospects and your competition (keeping all proprietary information confidential, of course). Then I’ll apply that knowledge to write crisp copy that meets your objectives.
+                        </p>
+                    </div>
+
+                    
+                </div>
+            </div>
+    </div>
+
+    <div class="container-fluid content-section-d">
+            <div class="container">
+                <div class="row">
+                    <h2>Need help regarding Development? </h2>
+                    <a href="/contact" class="btn btn-outline-light">Tell me about your Project</a>
+
+                </div>
+            </div>
+    </div>
+
+{% endblock bodyblock %}

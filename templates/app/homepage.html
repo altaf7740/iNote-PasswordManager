@@ -1,0 +1,100 @@
+{% extends 'app/layout.html' %}
+<!doctype html>
+{% load static %}
+
+{% block navbarHome %}active{% endblock navbarHome %}
+
+{% block headblock %}
+    <title>iNote - Password Manager</title>
+    <link rel="stylesheet" href="{% static 'assets/css/homepage.css' %}">
+
+{% endblock headblock %}
+
+{% block navbar-right %}
+    <li class="nav-item">
+    {%if name != None %}
+    <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" style="color: #ffc107;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{name|title}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="/account">Account</a></li>
+          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+        </ul>
+      </li>
+    {% else %}
+        <a class=" btn  btn-outline-warning navbar-custom-button" href="/login">Login</a>
+    {% endif %}
+    </li>
+{% endblock navbar-right %}
+
+
+
+
+{% block bodyblock %}
+    <div class="container-fluid cover py-5">
+        <div class="container container-header">
+            <h1>iNote</h1>
+            Notedown Your Password
+            <p><a class="btn btn-outline-light" href="dashboard">Get Started</a></p>
+        </div>
+    </div>
+    <div class="container-fluid content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-sm-7">
+                    <h2>Open Source Notebook</h2>
+                    <div class="passage1">
+                        iNote allows you to host your credentials on your own Nextcloud or ownCloud instance. Independently and open source.
+
+                    </div>
+                    <div class="passage2">
+                        The encryption is done on the client and server side with AES256 bit encryption, to ensure the safety of your credentials. We follow zero-trust model.
+                    </div>
+                </div>
+                <div class="col-lg-5 col-sm-5">
+                    <img class="content-section-a-image" src="{% static 'assets/img/lock.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container-fluid content-section-b">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-5">
+                    <img class="content-section-a-image" src="{% static 'assets/img/crossplatform.png' %}" alt="">
+                </div>
+                <div class="col-lg-7 col-sm-7">
+                    <h2>Cross Platform</h2>
+                    <div class="passage1">
+                        iNote is available for Android, Windows, Linux, Mac and of course also can be access from the web directly.
+
+                    </div>
+                    <div class="passage2">
+                        Very lightweightn and user friendly. Navigate to download section to list all the packages. 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid content-section-a">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-sm-7">
+                    <h2>Free & Open Source Software</h2>
+                    <div class="passage1">
+                        We love the open source software community. Contributing is our passion and because of this, we'll be glad if you want to participate and improve Passman.
+                    </div>
+                    <div class="passage2">
+                        Buy me a coffee if you like what we are doing.
+                    </div>
+                </div>
+                <div class="col-lg-5 col-sm-5">
+                    <img class="content-section-c-image" src="{% static 'assets/img/opensource.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock bodyblock %}

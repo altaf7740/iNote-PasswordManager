@@ -1,0 +1,73 @@
+.content-section-a{
+    padding-top: 9%;
+    padding-bottom: 9%;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    background-image: url(../img/about.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.content-section-d{
+    background-color: rgb(80, 77, 77); 
+    color:white;
+    padding-top: 5%;
+    padding-bottom: 5%;
+
+    
+}
+.btn-outline-light{
+    width: 300px;
+    margin: auto;
+    margin-top: 10px;
+}
+h1{
+    font-family: 'Fredoka One', cursive;
+    font-size: 50px;
+    color: rgb(80, 77, 77);
+    margin-bottom: 5%;
+}
+@media (max-width: 575.98px) { 
+    h1{
+        font-size: 25px;
+    }
+}
+h2{
+    text-align: center;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+}
+.content-section-b{
+    padding-top: 9%;
+    padding-bottom: 5%;
+}
+.passageb2, .passageb1{
+    margin-top: 20px;
+}
+.imageb2 img{
+    max-height: 500px;
+    max-width: 250px;
+    margin-left: 10%;
+    margin-bottom: 80px;
+}
+
+.imageb3 img{
+    border:  #ffffff 5px solid;
+    border-radius: 3%;
+    max-height: 500px;
+    max-width: 250px;
+    margin-left: 10%;
+    margin-bottom: 80px;
+}
+.custom-info2 h2{
+    padding-left: 10% ;
+    padding-right: 10%;
+    padding-top: 10%;
+}
+.custom-info2 h3{
+    text-align: center;
+    color:rgb(75, 75, 121);
+    font-size: 24px;
+    padding-top: 3%;
+    padding-bottom: 5%;
+}
